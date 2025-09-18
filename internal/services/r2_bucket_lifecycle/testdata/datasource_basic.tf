@@ -1,0 +1,1 @@
+data "cloudflare_r2_bucket_lifecycle" "%[1]s" {}
