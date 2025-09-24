@@ -49,7 +49,7 @@ func testSweepCloudflareR2Bucket(r string) error {
 		return errors.New("CLOUDFLARE_R2_ACCESS_KEY_ID must be set for this acceptance test")
 	}
 
-	if accessKeyId == "" {
+	if accessKeySecret == "" {
 		return errors.New("CLOUDFLARE_R2_ACCESS_KEY_SECRET must be set for this acceptance test")
 	}
 
@@ -154,12 +154,12 @@ func TestAccCloudflareR2Bucket_Basic(t *testing.T) {
 				},
 			},
 			{
-				ResourceName:        resourceName,
+				ResourceName: resourceName,
 				ImportStateIdFunc: func(*terraform.State) (string, error) {
 					return strings.Join([]string{accountID, rnd, "default"}, "/"), nil
 				},
-				ImportState:         true,
-				ImportStateVerify:   true,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
@@ -187,12 +187,12 @@ func TestAccCloudflareR2Bucket_Minimum(t *testing.T) {
 				},
 			},
 			{
-				ResourceName:        resourceName,
+				ResourceName: resourceName,
 				ImportStateIdFunc: func(*terraform.State) (string, error) {
 					return strings.Join([]string{accountID, rnd, "default"}, "/"), nil
 				},
-				ImportState:         true,
-				ImportStateVerify:   true,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
@@ -237,12 +237,12 @@ func TestAccCloudflareR2Bucket_AllLocations(t *testing.T) {
 	accountID := os.Getenv("CLOUDFLARE_ACCOUNT_ID")
 
 	locations := []string{"apac", "eeur", "enam", "weur", "wnam", "oc"}
-	
+
 	for _, location := range locations {
 		t.Run(location, func(t *testing.T) {
 			testRnd := rnd + location
 			testResourceName := "cloudflare_r2_bucket." + testRnd
-			
+
 			resource.Test(t, resource.TestCase{
 				PreCheck: func() {
 					acctest.TestAccPreCheck(t)
@@ -273,12 +273,12 @@ func TestAccCloudflareR2Bucket_AllJurisdictions(t *testing.T) {
 	accountID := os.Getenv("CLOUDFLARE_ACCOUNT_ID")
 
 	jurisdictions := []string{"default", "fedramp"}
-	
+
 	for _, jurisdiction := range jurisdictions {
 		t.Run(jurisdiction, func(t *testing.T) {
 			testRnd := rnd + jurisdiction
 			testResourceName := "cloudflare_r2_bucket." + testRnd
-			
+
 			resource.Test(t, resource.TestCase{
 				PreCheck: func() {
 					acctest.TestAccPreCheck(t)

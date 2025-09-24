@@ -1,0 +1,1 @@
+data "cloudflare_r2_bucket_sippy" "%[1]s" {}
