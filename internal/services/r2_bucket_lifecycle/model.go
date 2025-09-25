@@ -3,7 +3,6 @@
 package r2_bucket_lifecycle
 
 import (
-	"github.com/cloudflare/terraform-provider-cloudflare/internal/apijson"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
@@ -20,11 +19,11 @@ type R2BucketLifecycleModel struct {
 }
 
 func (m R2BucketLifecycleModel) MarshalJSON() (data []byte, err error) {
-	return apijson.MarshalRoot(m)
+	return m.marshalCustom()
 }
 
 func (m R2BucketLifecycleModel) MarshalJSONForUpdate(state R2BucketLifecycleModel) (data []byte, err error) {
-	return apijson.MarshalForUpdate(m, state)
+	return m.marshalCustomForUpdate(state)
 }
 
 type R2BucketLifecycleRulesModel struct {
