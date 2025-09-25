@@ -13,7 +13,7 @@ resource "cloudflare_r2_bucket_lock" "%[1]s" {
     prefix  = "temp/"
     condition = {
       type = "Date"
-      date = "2024-12-31T23:59:59Z"
+      date = "2025-12-31T23:59:59Z"
     }
   }]
 }

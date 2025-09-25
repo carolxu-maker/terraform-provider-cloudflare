@@ -76,33 +76,35 @@ func TestAccCloudflareR2BucketLifecycle_Update(t *testing.T) {
 									}),
 								}),
 							}),
-							// knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 	"id":      knownvalue.StringExact("archive-objects"),
-							// 	"enabled": knownvalue.Bool(true),
-							// 	"conditions": knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 		"prefix": knownvalue.StringExact("archive/"),
-							// 	}),
-							// 	"storage_class_transitions": knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 		"condition": knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 			"type":    knownvalue.StringExact("Age"),
-							// 			"max_age": knownvalue.Int64Exact(604800),
-							// 		}),
-							// 	}),
-							// 	"storage_class": knownvalue.StringExact("InfrequentAccess"),
-							// }),
-							// knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 	"id":      knownvalue.StringExact("cleanup-multipart"),
-							// 	"enabled": knownvalue.Bool(true),
-							// 	"conditions": knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 		"prefix": knownvalue.StringExact(""),
-							// 	}),
-							// 	"abort_multipart_uploads_transition": knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 		"condition": knownvalue.ObjectPartial(map[string]knownvalue.Check{
-							// 			"type":    knownvalue.StringExact("Age"),
-							// 			"max_age": knownvalue.Int64Exact(86400),
-							// 		}),
-							// 	}),
-							// }),
+							knownvalue.ObjectPartial(map[string]knownvalue.Check{
+								"id":      knownvalue.StringExact("archive-objects"),
+								"enabled": knownvalue.Bool(true),
+								"conditions": knownvalue.ObjectPartial(map[string]knownvalue.Check{
+									"prefix": knownvalue.StringExact("archive/"),
+								}),
+								"storage_class_transitions": knownvalue.ListPartial(map[int]knownvalue.Check{
+									0: knownvalue.ObjectPartial(map[string]knownvalue.Check{
+										"condition": knownvalue.ObjectPartial(map[string]knownvalue.Check{
+											"type":    knownvalue.StringExact("Age"),
+											"max_age": knownvalue.Int64Exact(604800),
+										}),
+										"storage_class": knownvalue.StringExact("InfrequentAccess"),
+									}),
+								}),
+							}),
+							knownvalue.ObjectPartial(map[string]knownvalue.Check{
+								"id":      knownvalue.StringExact("cleanup-multipart"),
+								"enabled": knownvalue.Bool(true),
+								"conditions": knownvalue.ObjectPartial(map[string]knownvalue.Check{
+									"prefix": knownvalue.StringExact(""),
+								}),
+								"abort_multipart_uploads_transition": knownvalue.ObjectPartial(map[string]knownvalue.Check{
+									"condition": knownvalue.ObjectPartial(map[string]knownvalue.Check{
+										"type":    knownvalue.StringExact("Age"),
+										"max_age": knownvalue.Int64Exact(86400),
+									}),
+								}),
+							}),
 						}),
 					),
 					// statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("delete_objects_transition").AtMapKey("condition").AtMapKey("max_age"), knownvalue.Int64Exact(5184000)),

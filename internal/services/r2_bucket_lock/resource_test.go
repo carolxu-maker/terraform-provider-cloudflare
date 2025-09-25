@@ -109,7 +109,7 @@ func TestAccCloudflareR2BucketLock_DateCondition(t *testing.T) {
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("id"), knownvalue.StringExact("date-lock")),
 					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("condition").AtMapKey("type"), knownvalue.StringExact("Date")),
-					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("condition").AtMapKey("date"), knownvalue.StringExact("2024-12-31T23:59:59Z")),
+					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("condition").AtMapKey("date"), knownvalue.StringExact("2025-12-31T23:59:59Z")),
 					statecheck.ExpectKnownValue(resourceName, tfjsonpath.New("rules").AtSliceIndex(0).AtMapKey("condition").AtMapKey("max_age_seconds"), knownvalue.Null()),
 				},
 			},
